@@ -25,7 +25,7 @@ sync_devices:
       - command: "show ip interface brief"
         parser: "textfsm"
         jpath: "[?ip_address==`{{ obj }}`].ip_address"
-        post_processor: "{{ obj[1] }}"
+        post_processor: "{{ obj[0] }}"
         iterable_type: "int"
 sync_network_data:
   pre_processor:
