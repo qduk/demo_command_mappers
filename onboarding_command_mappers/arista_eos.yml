@@ -19,12 +19,12 @@ sync_devices:
     commands:
       - command: "show ip interface brief"
         parser: "textfsm"
-        jpath: "[?ip_address==`{{ obj }}`].interface"
+        jpath: "[?starts_with(ip_address, `{{ obj }}/`)].interface | [0]"
   mask_length:
     commands:
       - command: "show ip interface brief"
         parser: "textfsm"
-        jpath: "[?ip_address==`{{ obj }}`].ip_address"
+        jpath: "[?starts_with(ip_address, `{{ obj }}/`)].ip_address | [0] | split(`/`, @) | [1]"
 sync_network_data:
   pre_processor:
     vlan_map:
