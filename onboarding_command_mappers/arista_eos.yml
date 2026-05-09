@@ -19,13 +19,13 @@ sync_devices:
     commands:
       - command: "show ip interface brief"
         parser: "textfsm"
-        jpath: "interfaces.*.{name: name, match_ip: interfaceAddress.ipAddr.address==`{{ obj }}`}[?match_ip].name"
+        jpath: "[?ip_address==`{{ obj }}`].interface"
   mask_length:
     commands:
       - command: "show ip interface brief"
         parser: "textfsm"
-        jpath: "interfaces.*.interfaceAddress[?ipAddr.address==`{{ obj }}`].ipAddr.maskLen"
-        post_processor: "{{ obj[0] }}"
+        jpath: "[?ip_address==`{{ obj }}`].ip_address"
+        post_processor: "{{ obj[1] }}"
         iterable_type: "int"
 sync_network_data:
   pre_processor:
