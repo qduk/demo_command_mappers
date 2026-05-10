@@ -26,6 +26,7 @@ sync_devices:
         parser: "textfsm"
         jpath: "[?starts_with(ip_address, `{{ obj }}/`)].ip_address | [0]"
         post_processor: "{{ obj.split('/')[1] }}"
+        iterable_type: "int"
 sync_network_data:
   pre_processor:
     vlan_map:
